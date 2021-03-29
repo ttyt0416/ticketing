@@ -1,20 +1,14 @@
-import axios from 'axios'
+import buildClient from '../api/build-client';
 
 const LandingPage= () => {
     return <h1>Landing Page</h1>;
 };
 
-LandingPage.getInitialProps = async () => {
-    if (typeof window === 'undefined') {
-        //it means if it on server
+LandingPage.getInitialProps = async ({ context }) => {
 
-
-    } else {
-        //it means if it on browser
-        
-    }
-
-    return response.data;
+    const { data } = await buildClient({ context }).get('/api/users/currentuser')
+    
+    return data;
 };
 
 export default LandingPage;
